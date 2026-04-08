@@ -19,10 +19,20 @@ Mod tối ưu thời gian khởi động Minecraft, đặc biệt phù hợp cho
 
 ## Cách build
 
-```bash
-# 1. Clone hoặc copy thư mục SpeedBoot về máy
-# 2. Mở terminal trong thư mục SpeedBoot
+### Cách 1: GitHub Actions (khuyên dùng — không cần máy mạnh)
 
+1. Tạo repo mới trên [github.com](https://github.com)
+2. Upload toàn bộ thư mục `SpeedBoot/` lên repo đó
+3. Vào tab **Actions** → chọn workflow **Build SpeedBoot Mod** → nhấn **Run workflow**
+4. Chờ 5–10 phút, sau đó tải file `.jar` từ mục **Artifacts**
+
+Mỗi lần push code lên `main` sẽ tự động build lại.
+
+---
+
+### Cách 2: Build local (cần máy ≥4GB RAM)
+
+```bash
 # Linux / macOS
 ./gradlew build
 
