@@ -13,8 +13,8 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 /**
  * SpeedBoot: TitleScreenMixin
  *
- * Skips the fade-in animation of the title screen so it appears instantly.
- * The vanilla fade-in can last ~500 ms which feels slow after loading.
+ * Forces the title screen background to be fully visible immediately,
+ * skipping the ~500 ms fade-in animation.
  */
 @Environment(EnvType.CLIENT)
 @Mixin(TitleScreen.class)
@@ -23,9 +23,6 @@ public class TitleScreenMixin {
     @Shadow
     private float backgroundFadeOpacity;
 
-    /**
-     * Force the background fade to be fully opaque immediately.
-     */
     @Inject(method = "init", at = @At("TAIL"))
     private void speedboot$skipFadeIn(CallbackInfo ci) {
         this.backgroundFadeOpacity = 1.0f;

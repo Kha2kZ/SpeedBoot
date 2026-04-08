@@ -1,0 +1,83 @@
+Run ./gradlew build -x remapSourcesJar --no-daemon
+Downloading https://services.gradle.org/distributions/gradle-8.6-bin.zip
+............10%.............20%............30%.............40%.............50%............60%.............70%.............80%............90%.............100%
+
+Welcome to Gradle 8.6!
+
+Here are the highlights of this release:
+ - Configurable encryption key for configuration cache
+ - Build init improvements
+ - Build authoring improvements
+
+For more details see https://docs.gradle.org/8.6/release-notes.html
+
+To honour the JVM settings for this build a single-use Daemon process will be forked. For more on this, please refer to https://docs.gradle.org/8.6/userguide/gradle_daemon.html#sec:disabling_the_daemon in the Gradle documentation.
+Daemon will be stopped at the end of the build 
+
+> Configure project :
+Fabric Loom: 1.6.12
+:remapping 50 mods from modImplementation (java-api)
+
+> Task :compileJava
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/TitleScreenMixin.java:20: error: Mixin has no targets
+@Mixin(TitleScreen.class)
+^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/SplashOverlayMixin.java:28: error: Mixin has no targets
+@Mixin(SplashOverlay.class)
+^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/NarratorMixin.java:24: error: Mixin has no targets
+@Mixin(NarratorManager.class)
+^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/TitleScreenMixin.java:6: error: package net.minecraft.client.gui.screen does not exist
+import net.minecraft.client.gui.screen.TitleScreen;
+                                      ^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/SplashOverlayMixin.java:6: error: package net.minecraft.client.gui.screen does not exist
+import net.minecraft.client.gui.screen.SplashOverlay;
+                                      ^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/SplashOverlayMixin.java:7: error: cannot find symbol
+import net.minecraft.client.MinecraftClient;
+                           ^
+  symbol:   class MinecraftClient
+  location: package net.minecraft.client
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/NarratorMixin.java:6: error: cannot find symbol
+import net.minecraft.client.util.NarratorManager;
+                                ^
+  symbol:   class NarratorManager
+  location: package net.minecraft.client.util
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/NarratorMixin.java:7: error: package net.minecraft.client.option does not exist
+import net.minecraft.client.option.NarratorMode;
+                                  ^
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/NarratorMixin.java:32: error: cannot find symbol
+    private void speedboot$skipNarratorInit(NarratorMode mode, CallbackInfo ci) {
+                                            ^
+  symbol:   class NarratorMode
+  location: class NarratorMixin
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/TitleScreenMixin.java:20: error: cannot find symbol
+@Mixin(TitleScreen.class)
+       ^
+  symbol: class TitleScreen
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/SplashOverlayMixin.java:28: error: cannot find symbol
+@Mixin(SplashOverlay.class)
+       ^
+  symbol: class SplashOverlay
+/home/runner/work/SpeedBoot/SpeedBoot/src/main/java/com/speedboot/mixin/client/NarratorMixin.java:24: error: cannot find symbol
+@Mixin(NarratorManager.class)
+       ^
+  symbol: class NarratorManager
+12 errors
+
+FAILURE: Build failed with an exception.
+
+* What went wrong:
+Execution failed for task ':compileJava'.
+> Compilation failed; see the compiler error output for details.
+
+* Try:
+> Run with --info option to get more log output.
+> Run with --scan to get full insights.
+
+BUILD FAILED in 1m 4s
+
+> Task :compileJava FAILED
+1 actionable task: 1 executed
+Error: Process completed with exit code 1.
