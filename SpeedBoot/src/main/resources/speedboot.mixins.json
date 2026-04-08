@@ -1,0 +1,13 @@
+{
+  "required": true,
+  "package": "com.speedboot.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "DataPackContentsMixin",
+    "DedicatedServerWatchdogMixin"
+  ],
+  "client": [],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
