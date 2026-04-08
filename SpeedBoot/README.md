@@ -1,36 +1,36 @@
-# SpeedBoot — Fabric 1.20.1
+# SpeedBoot — Fabric 1.20.5
 
-Mod tối ưu thời gian khởi động Minecraft, đặc biệt phù hợp cho thiết bị RAM thấp như TV Box.
+A lightweight Fabric mod that reduces Minecraft startup time by skipping unnecessary initialization processes. Designed for low-RAM devices such as TV Boxes and budget Android phones running PojavLauncher.
 
-## Những gì SpeedBoot tối ưu
+## What SpeedBoot optimizes
 
-| Tối ưu | Thời gian tiết kiệm (ước tính) |
-|--------|-------------------------------|
-| Bỏ qua thời gian chờ Splash Screen | ~1 giây |
-| Bỏ qua khởi tạo Narrator khi tắt | ~200–400ms |
-| Rút ngắn hiệu ứng fade-in Title Screen | ~500ms |
-| Log timing DataPack để debug | (chuẩn đoán) |
+| Optimization | Estimated time saved |
+|---|---|
+| Removes artificial splash screen delay | ~1 second |
+| Skips narrator init when disabled | ~200–400 ms |
+| Skips title screen fade-in animation | ~500 ms |
+| Logs DataPack reload timing for debugging | (diagnostic) |
 
-## Yêu cầu để build
+## Requirements
 
-- **Java 17** trở lên (JDK, không phải JRE)
-- Kết nối Internet lần đầu (để tải Gradle 8.6 + Minecraft jar)
-- **RAM tối thiểu 4GB** (chỉ cần cho lần build đầu tiên)
+- Minecraft **1.20.5**
+- Fabric Loader **≥ 0.15.0**
+- Fabric API **0.97.8+1.20.5**
+- Java **21**
 
-## Cách build
+## How to build
 
-### Cách 1: GitHub Actions (khuyên dùng — không cần máy mạnh)
+### Option 1: GitHub Actions (recommended — no powerful machine needed)
 
-1. Tạo repo mới trên [github.com](https://github.com)
-2. Upload toàn bộ thư mục `SpeedBoot/` lên repo đó
-3. Vào tab **Actions** → chọn workflow **Build SpeedBoot Mod** → nhấn **Run workflow**
-4. Chờ 5–10 phút, sau đó tải file `.jar` từ mục **Artifacts**
+1. Fork or clone this repository to your GitHub account
+2. Go to the **Actions** tab → select **Build SpeedBoot Mod** → click **Run workflow**
+3. Wait 5–10 minutes, then download the `.jar` from the **Artifacts** section
 
-Mỗi lần push code lên `main` sẽ tự động build lại.
+The mod is also built automatically on every push to `main`.
 
 ---
 
-### Cách 2: Build local (cần máy ≥4GB RAM)
+### Option 2: Build locally (requires ≥ 4 GB RAM and JDK 21)
 
 ```bash
 # Linux / macOS
@@ -40,55 +40,55 @@ Mỗi lần push code lên `main` sẽ tự động build lại.
 gradlew.bat build
 ```
 
-Lần đầu tiên sẽ mất 5–15 phút (tải Gradle, decompile Minecraft).
-Lần sau chỉ mất 10–30 giây.
+The first run takes 5–15 minutes (downloading Gradle, decompiling Minecraft).  
+Subsequent builds take 10–30 seconds thanks to caching.
 
-File `.jar` output nằm tại:
+Output file:
 ```
 build/libs/speedboot-1.0.0.jar
 ```
 
-## Cài vào game
+## Installation
 
-1. Copy file `build/libs/speedboot-1.0.0.jar` vào thư mục `mods/` của Minecraft.
-2. Đảm bảo đã cài **Fabric Loader 0.15+** và **Fabric API 0.92+** cho Minecraft 1.20.1.
-3. Khởi động game bình thường.
+1. Copy `speedboot-1.0.0.jar` into your `mods/` folder.
+2. Make sure **Fabric Loader** and **Fabric API** are already installed.
+3. Launch the game normally.
 
-> **Lưu ý cho PojavLauncher:** Thư mục `mods/` thường ở  
+> **PojavLauncher users:** the `mods/` folder is usually at  
 > `/storage/emulated/0/games/PojavLauncher/.minecraft/mods/`
 
-## Cấu trúc project
+## Project structure
 
 ```
 SpeedBoot/
-├── build.gradle                    # Cấu hình build Fabric Loom
-├── gradle.properties               # Phiên bản Minecraft, mod, loader
+├── build.gradle                    # Fabric Loom build config
+├── gradle.properties               # Minecraft, mod, and loader versions
 ├── settings.gradle
-├── gradlew / gradlew.bat           # Gradle wrapper (chạy trực tiếp)
+├── gradlew / gradlew.bat           # Gradle wrapper scripts
 ├── gradle/wrapper/
 │   ├── gradle-wrapper.jar
-│   └── gradle-wrapper.properties   # Trỏ đến Gradle 8.6
+│   └── gradle-wrapper.properties   # Points to Gradle 8.6
 └── src/main/java/com/speedboot/
-    ├── SpeedBootMod.java            # Entry point chính
-    ├── SpeedBootClientMod.java      # Entry point client
+    ├── SpeedBootMod.java            # Common entry point
+    ├── SpeedBootClientMod.java      # Client-side entry point
     └── mixin/
-        ├── DataPackContentsMixin.java         # Log timing DataPack
-        ├── DedicatedServerWatchdogMixin.java  # (server)
+        ├── DataPackContentsMixin.java         # DataPack reload timing
+        ├── DedicatedServerWatchdogMixin.java  # Server watchdog
         └── client/
-            ├── SplashOverlayMixin.java        # Bỏ delay splash
-            ├── NarratorMixin.java             # Skip narrator init
-            ├── ResourceReloadMixin.java       # Log resource scan
-            └── TitleScreenMixin.java          # Skip fade-in
+            ├── SplashOverlayMixin.java        # Removes splash delay
+            ├── NarratorMixin.java             # Skips narrator init
+            ├── ResourceReloadMixin.java       # Resource pack scan log
+            └── TitleScreenMixin.java          # Skips fade-in
 ```
 
-## Tùy chỉnh
+## Configuration
 
-Mở `gradle.properties` để thay đổi phiên bản:
+Edit `gradle.properties` to change versions:
 
 ```properties
-minecraft_version=1.20.1
+minecraft_version=1.20.5
 loader_version=0.15.11
-fabric_version=0.92.2+1.20.1
+fabric_version=0.97.8+1.20.5
 mod_version=1.0.0
 ```
 
